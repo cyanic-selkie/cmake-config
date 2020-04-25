@@ -14,8 +14,13 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # Adds the options to turn on address and undefined sanitizers
-option(ADDRESS_SANITIZER ADDRESS_SANITIZER $<IF:$<CONFIG:DEBUG>,ON,OFF>)
-option(UNDEFINED_SANITIZER UNDEFINED_SANITIZER $<IF:$<CONFIG:DEBUG>,ON,OFF>)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    option(ADDRESS_SANITIZER "Turn address sanitizer on." ON)
+    option(UNDEFINED_SANITIZER "Turn undefined sanitizer on." ON)
+else()
+    option(ADDRESS_SANITIZER "Turn address sanitizer on." OFF)
+    option(UNDEFINED_SANITIZER "Turn undefined sanitizer on." OFF)
+endif()
 
 # Set default compiler options
 if(MSVC)

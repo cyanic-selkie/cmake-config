@@ -13,19 +13,19 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
       "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
-# Adds the options to turn on address and undefined sanitizers
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    option(ADDRESS_SANITIZER "Turn address sanitizer on." ON)
-    option(UNDEFINED_SANITIZER "Turn undefined sanitizer on." ON)
-else()
-    option(ADDRESS_SANITIZER "Turn address sanitizer on." OFF)
-    option(UNDEFINED_SANITIZER "Turn undefined sanitizer on." OFF)
-endif()
-
 # Set default compiler options
 if(MSVC)
     add_compile_options("/W4" "$<$<CONFIG:RELEASE>:/O2>")
 else()
+    # Adds the options to turn on address and undefined sanitizers
+    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+        option(ADDRESS_SANITIZER "Turn address sanitizer on." ON)
+        option(UNDEFINED_SANITIZER "Turn undefined sanitizer on." ON)
+    else()
+        option(ADDRESS_SANITIZER "Turn address sanitizer on." OFF)
+        option(UNDEFINED_SANITIZER "Turn undefined sanitizer on." OFF)
+    endif()
+
     add_compile_options("-Wall" "-Wextra" "-Werror" "-Wpedantic" "-Wconversion" "-Wshadow" "$<$<CONFIG:RELEASE>:-O2>")
     add_link_options("$<$<CONFIG:RELEASE>:-O2>")
 

@@ -23,4 +23,4 @@ This configuration adds some basic build option handling and default build flags
 - It turns on CMake option to export ```compile_commands.json``` file for use with IDEs and linters.
 
 ## Usage
-Include this CMake file by adding ```include(${CMAKE_SOURCE_DIR}/<path_to_directory_in_project>/config.cmake)``` to your ```CMakeLists.txt```.
+Include this CMake file by adding ```include(${CMAKE_SOURCE_DIR}/<path_to_directory_in_project>/compiler.cmake)``` to your ```CMakeLists.txt```.

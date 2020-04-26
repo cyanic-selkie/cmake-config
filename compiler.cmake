@@ -15,7 +15,7 @@ endif()
 
 # Set default compiler options
 if(MSVC)
-    add_compile_options("/W4" "$<$<CONFIG:RELEASE>:/O2>")
+    add_compile_options("/W4" "/WX" "$<$<CONFIG:RELEASE>:/O2>")
 else()
     # Adds the options to turn on address and undefined sanitizers
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
